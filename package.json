@@ -17,7 +17,8 @@
   "scripts": {
     "start": "yarn run build && http-server dist",
     "build": "rimraf dist/components && svelte compile -f iife -i src/ -o dist/components",
-    "watch": "npm-watch"
+    "watch": "npm-watch",
+    "deploy-gh-pages": "git subtree push --prefix dist origin gh-pages"
   },
   "watch": {
     "build": {
