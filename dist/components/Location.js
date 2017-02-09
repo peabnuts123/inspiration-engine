@@ -176,7 +176,15 @@ var template = (function () {
     }
 
     function randomLocationName() {
-        var locationName = randomArrayItem(names) + " " + randomArrayItem(locations);
+        var name = randomArrayItem(names);
+        
+        //Occasionally duplicate first name e.g. 
+        if(name.indexOf(' ') === -1 && Math.random() < 0.04) {
+            console.log("Duplication!");
+            name = name + " " + name;
+        }
+
+        var locationName = name + " " + randomArrayItem(locations);
 
         if (Math.random() <= 0.15) {
             locationName += " of " + randomArrayItem(attributes);
