@@ -16,6 +16,7 @@
                         <label for="rowInput" class="col-sm-2 control-label">Rows</label>
                         <div class="col-sm-10">
                             <input type="number" 
+                                pattern="\d*"
                                 class="form-control" 
                                 id="rowInput" 
                                 bind:value="numRows" 
@@ -29,6 +30,7 @@
                         <label for="colInput" class="col-sm-2 control-label">Columns</label>
                         <div class="col-sm-10">
                             <input type="number" 
+                                pattern="\d*"
                                 class="form-control" 
                                 id="colInput" 
                                 bind:value="numColumns" 

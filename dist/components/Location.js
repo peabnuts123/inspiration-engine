@@ -319,6 +319,7 @@ function renderMainFragment ( root, component ) {
 	
 	var input = createElement( 'input' );
 	input.type = "number";
+	input.pattern = "\\d*";
 	input.className = "form-control";
 	input.id = "rowInput";
 	
@@ -359,6 +360,7 @@ function renderMainFragment ( root, component ) {
 	
 	var input1 = createElement( 'input' );
 	input1.type = "number";
+	input1.pattern = "\\d*";
 	input1.className = "form-control";
 	input1.id = "colInput";
 	
