@@ -1,10 +1,20 @@
-var Test = (function () { 'use strict';
+var Location = (function () { 'use strict';
+
+var template = (function () {
+    return {
+        data() {
+            return {
+                test: "Hello world"
+            }
+        }
+    }
+}());
 
 function renderMainFragment ( root, component ) {
 	var h2 = createElement( 'h2' );
 	
-	appendNode( createText( "Svelte Object: " ), h2 );
-	var text1 = createText( root.message );
+	appendNode( createText( "I am location: " ), h2 );
+	var text1 = createText( root.test );
 	appendNode( text1, h2 );
 
 	return {
@@ -13,7 +23,7 @@ function renderMainFragment ( root, component ) {
 		},
 		
 		update: function ( changed, root ) {
-			text1.data = root.message;
+			text1.data = root.test;
 		},
 		
 		teardown: function ( detach ) {
@@ -24,10 +34,10 @@ function renderMainFragment ( root, component ) {
 	};
 }
 
-function Test ( options ) {
+function Location ( options ) {
 	options = options || {};
 	
-	this._state = options.data || {};
+	this._state = Object.assign( template.data(), options.data );
 
 	this._observers = {
 		pre: Object.create( null ),
@@ -43,11 +53,11 @@ function Test ( options ) {
 	if ( options.target ) this._fragment.mount( options.target, null );
 }
 
-Test.prototype.get = function get( key ) {
+Location.prototype.get = function get( key ) {
  	return key ? this._state[ key ] : this._state;
  };
 
-Test.prototype.fire = function fire( eventName, data ) {
+Location.prototype.fire = function fire( eventName, data ) {
  	var handlers = eventName in this._handlers && this._handlers[ eventName ].slice();
  	if ( !handlers ) return;
  
@@ -56,7 +66,7 @@ Test.prototype.fire = function fire( eventName, data ) {
  	}
  };
 
-Test.prototype.observe = function observe( key, callback, options ) {
+Location.prototype.observe = function observe( key, callback, options ) {
  	var group = ( options && options.defer ) ? this._observers.pre : this._observers.post;
  
  	( group[ key ] || ( group[ key ] = [] ) ).push( callback );
@@ -75,7 +85,7 @@ Test.prototype.observe = function observe( key, callback, options ) {
  	};
  };
 
-Test.prototype.on = function on( eventName, handler ) {
+Location.prototype.on = function on( eventName, handler ) {
  	var handlers = this._handlers[ eventName ] || ( this._handlers[ eventName ] = [] );
  	handlers.push( handler );
  
@@ -87,12 +97,12 @@ Test.prototype.on = function on( eventName, handler ) {
  	};
  };
 
-Test.prototype.set = function set( newState ) {
+Location.prototype.set = function set( newState ) {
  	this._set( newState );
  	( this._root || this )._flush();
  };
 
-Test.prototype._flush = function _flush() {
+Location.prototype._flush = function _flush() {
  	if ( !this._renderHooks ) return;
  
  	while ( this._renderHooks.length ) {
@@ -101,7 +111,7 @@ Test.prototype._flush = function _flush() {
  	}
  };
 
-Test.prototype._set = function _set ( newState ) {
+Location.prototype._set = function _set ( newState ) {
 	var oldState = this._state;
 	this._state = Object.assign( {}, oldState, newState );
 	
@@ -110,7 +120,7 @@ Test.prototype._set = function _set ( newState ) {
 	dispatchObservers( this, this._observers.post, newState, oldState );
 };
 
-Test.prototype.teardown = function teardown ( detach ) {
+Location.prototype.teardown = function teardown ( detach ) {
 	this.fire( 'teardown' );
 
 	this._fragment.teardown( detach !== false );
@@ -162,6 +172,6 @@ function createText( data ) {
 	return document.createTextNode( data );
 }
 
-return Test;
+return Location;
 
 }());

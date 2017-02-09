@@ -1,8 +1,8 @@
 (function() {
-    var test = new Test({
-        target: document.querySelector("#testMount"),
+    var test = new Location({
+        target: document.querySelector("#mount_Location"),
         data: {
-            message: "Hello World"
+            
         }
     });
 })();
