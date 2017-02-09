@@ -11,17 +11,21 @@
 
     </head>
     <body class="container">
-        <div class="jumbotron">
-            <h1>Inspiration Engine <small>Your automated muse</small></h1>
-            <p>Generate locations, names, emotions...</p>
+        <div id="mount_Header"></div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div id="mount_Location"></div>
+            </div>
         </div>
 
-        <h2>Location Generator</h2>
-        <div class="well">
-            <div id="mount_Location"></div>
-        </div>
 
+
+        <!-- Components -->
+        <script type="text/javascript" src="components/Header.js"></script>
         <script type="text/javascript" src="components/Location.js"></script>
+
+        <!-- Main App -->
         <script type="text/javascript" src="scripts/app.js"></script>
     </body>
 </html>

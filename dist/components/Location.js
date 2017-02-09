@@ -1,7 +1,199 @@
 var Location = (function () { 'use strict';
 
 var template = (function () {
+    var names = [
+        'Really Dangerous', 
+        'Uncanny', 
+        'Forbidden', 
+        'Fantasy', 
+        'Dire', 
+        'Galloping', 
+        'Cartoon', 
+        'Miyazaki', 
+        'Silicon', 
+        'Frictional', 
+        'Barked', 
+        'Rough', 
+        'Hilly', 
+        'Vile', 
+        'Swampy', 
+        'Marshy', 
+        'Jarvis', 
+        'Andrews', 
+        'Entombed', 
+        'Magical', 
+        'Rocky', 
+        'Dark', 
+        'Beautiful', 
+        'Autumnal', 
+        'Villainous', 
+        'Calm', 
+        'Eastern', 
+        'Western', 
+        'Northern', 
+        'Southern', 
+        'Far', 
+        'Queens', 
+        'Uncharted', 
+        'Unplottable', 
+        'Marble', 
+        'Paper', 
+        'Golden', 
+        'Smokey', 
+        'Foggy', 
+        'Misty', 
+        'Rainy', 
+        'Thunder', 
+        'Windy', 
+        'Big Boss', 
+        'Smugglers', 
+        'Neon', 
+        'Blue', 
+        'Red', 
+        'Endless', 
+        'Wooded', 
+        'Flooded', 
+        'Godrics', 
+        'Salazaars', 
+        'Helgas', 
+        'Rowenas', 
+        'Hogwarts', 
+        'Bills', 
+        'Cao Cao', 
+        'Liu Bai', 
+        'Liu Bai', 
+        'Wai Lin', 
+        'Bo Hao', 
+        'Su Mai', 
+        'Har Gao', 
+        'Shigeru', 
+        'Miyamoto',  
+        'Rollo', 
+        'Solar', 
+        'Lam', 
+        'Sinoma', 
+        'Rubico', 
+        'Sino', 
+        'Kappa'
+    ];
+
+    var locations = [
+        'Roads', 
+        'Valley', 
+        'Forest', 
+        'Fields', 
+        'Docks', 
+        'Gorge', 
+        'Encampment', 
+        'Jungle', 
+        'Plains', 
+        'Temple', 
+        'Farmlands', 
+        'Gulley', 
+        'Outcrop', 
+        'Trails', 
+        'Drylands', 
+        'Ocean', 
+        'Ethereal Plane', 
+        'Labyrinth', 
+        'Crag', 
+        'Cliffs', 
+        'Cavern', 
+        'Cave', 
+        'Mountain', 
+        'Sea', 
+        'Lake', 
+        'River', 
+        'Archives', 
+        'Dungeon', 
+        'Village', 
+        'Megacity', 
+        'Megalopolis', 
+        'Path', 
+        'Cove', 
+        'Bay', 
+        'Desert', 
+        'Casino', 
+        'Hideout', 
+        'Gardens', 
+        'Glade', 
+        'Hollow', 
+        'School', 
+        'Way', 
+        'Volcano', 
+        'Maze', 
+        'House', 
+        'passage', 
+        'Pass', 
+        'Ports', 
+        'Belt', 
+        'Starscape', 
+        'Plaza', 
+        'Ministry', 
+        'Castle'
+    ];
+
+    var attributes = [
+        'Death', 
+        'Life', 
+        'Sacrifice', 
+        'Innovation', 
+        'Networking', 
+        'Magic', 
+        'Confusion', 
+        'Imminent Death', 
+        'Unity', 
+        'Harmony', 
+        'Chaos', 
+        'Entropy', 
+        'Order', 
+        'Unpredictability', 
+        'Resolution', 
+        'GabeN', 
+        'Time', 
+        'Fire', 
+        'Air', 
+        'Earth', 
+        'Water', 
+        'Lightening', 
+        'Jasaar', 
+        'Mystery', 
+        'Jas’kar', 
+        'Clarity', 
+        'Susan Jessica', 
+        'Witchcraft and Wizardry', 
+        'Might', 
+        'Advancement', 
+        'Popularity', 
+        'Ja’den Dionne', 
+        'Feline Dion', 
+        'Deon Blaster', 
+        'Power Tennis'
+    ];
+
+    function randomArrayItem(array) {
+        return array[~~(Math.random()*array.length)];
+    }
+
     return {
+        helpers: {
+            randomLocationName: function() {
+                var locationName = randomArrayItem(names) + " " + randomArrayItem(locations);
+
+                if (Math.random() > 0.15) {
+                    locationName += " of " + randomArrayItem(attributes);
+                }
+
+                return locationName;
+            },
+            iterationArray: function(length) {
+                var array = [];
+                for(var i=0; i<length; i++) {
+                    array.push(i);
+                }
+                return array;
+            }
+        },
         data() {
             return {
                 test: "Hello world"
@@ -13,22 +205,92 @@ var template = (function () {
 function renderMainFragment ( root, component ) {
 	var h2 = createElement( 'h2' );
 	
-	appendNode( createText( "I am location: " ), h2 );
-	var text1 = createText( root.test );
-	appendNode( text1, h2 );
+	appendNode( createText( "Locations" ), h2 );
+	var text1 = createText( "\n\n" );
+	
+	var table = createElement( 'table' );
+	table.className = "table table-striped table-hover";
+	
+	var tbody = createElement( 'tbody' );
+	
+	appendNode( tbody, table );
+	var eachBlock_anchor = createComment();
+	appendNode( eachBlock_anchor, tbody );
+	var eachBlock_value = template.helpers.iterationArray(10);
+	var eachBlock_iterations = [];
+	
+	for ( var i = 0; i < eachBlock_value.length; i += 1 ) {
+		eachBlock_iterations[i] = renderEachBlock( root, eachBlock_value, eachBlock_value[i], i, component );
+		eachBlock_iterations[i].mount( eachBlock_anchor.parentNode, eachBlock_anchor );
+	}
 
 	return {
 		mount: function ( target, anchor ) {
 			insertNode( h2, target, anchor );
+			insertNode( text1, target, anchor );
+			insertNode( table, target, anchor );
 		},
 		
 		update: function ( changed, root ) {
-			text1.data = root.test;
+			var eachBlock_value = template.helpers.iterationArray(10);
+			
+			for ( var i = 0; i < eachBlock_value.length; i += 1 ) {
+				if ( !eachBlock_iterations[i] ) {
+					eachBlock_iterations[i] = renderEachBlock( root, eachBlock_value, eachBlock_value[i], i, component );
+					eachBlock_iterations[i].mount( eachBlock_anchor.parentNode, eachBlock_anchor );
+				} else {
+					eachBlock_iterations[i].update( changed, root, eachBlock_value, eachBlock_value[i], i );
+				}
+			}
+			
+			teardownEach( eachBlock_iterations, true, eachBlock_value.length );
+			
+			eachBlock_iterations.length = eachBlock_value.length;
+		},
+		
+		teardown: function ( detach ) {
+			teardownEach( eachBlock_iterations, false );
+			
+			if ( detach ) {
+				detachNode( h2 );
+				detachNode( text1 );
+				detachNode( table );
+			}
+		}
+	};
+}
+
+function renderEachBlock ( root, eachBlock_value, number, number__index, component ) {
+	var tr = createElement( 'tr' );
+	tr.className = "text-center";
+	
+	var td = createElement( 'td' );
+	
+	appendNode( td, tr );
+	var text = createText( template.helpers.randomLocationName() );
+	appendNode( text, td );
+	appendNode( createText( "\n            " ), tr );
+	
+	var td1 = createElement( 'td' );
+	
+	appendNode( td1, tr );
+	var text2 = createText( template.helpers.randomLocationName() );
+	appendNode( text2, td1 );
+
+	return {
+		mount: function ( target, anchor ) {
+			insertNode( tr, target, anchor );
+		},
+		
+		update: function ( changed, root, eachBlock_value, number, number__index ) {
+			text.data = template.helpers.randomLocationName();
+			
+			text2.data = template.helpers.randomLocationName();
 		},
 		
 		teardown: function ( detach ) {
 			if ( detach ) {
-				detachNode( h2 );
+				detachNode( tr );
 			}
 		}
 	};
@@ -170,6 +432,16 @@ function appendNode( node, target ) {
 
 function createText( data ) {
 	return document.createTextNode( data );
+}
+
+function createComment() {
+	return document.createComment( '' );
+}
+
+function teardownEach( iterations, detach, start ) {
+	for ( var i = ( start || 0 ); i < iterations.length; i += 1 ) {
+		iterations[i].teardown( detach );
+	}
 }
 
 return Location;
