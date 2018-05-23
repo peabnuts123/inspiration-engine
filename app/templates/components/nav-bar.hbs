@@ -1,0 +1,17 @@
+ <nav>
+    <div class="nav-wrapper Nav-header">
+      {{#link-to 'index' classNames="brand-logo"}}Inspiration Engine{{/link-to}}
+      <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+        {{#each links as |link|}}
+          <li class="{{if (eq link.route router.currentRouteName) 'active'}}">{{#link-to link.route}}{{link.title}}{{/link-to}}</li>
+        {{/each}}
+      </ul>
+    </div>
+  </nav>
+
+  <ul class="sidenav" id="mobile-nav">
+      {{#each links as |link|}}
+        <li>{{#link-to link.route}}{{link.title}}{{/link-to}}</li>
+      {{/each}}
+  </ul>
