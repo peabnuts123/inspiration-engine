@@ -14,7 +14,6 @@ export default Controller.extend({
   },
 
   countDown() {
-    // this.timer -= 1;
     set(this, 'timer', this.timer - 1);
 
     if (this.timer > 0) {

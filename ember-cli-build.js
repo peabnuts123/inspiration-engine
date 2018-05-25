@@ -27,5 +27,16 @@ module.exports = function (defaults) {
 
   app.import('node_modules/materialize-css/dist/js/materialize.js');
 
+  app.import('vendor/tracery/tracery.js', {
+    using: [
+      { transformation: 'cjs', as: 'tracery' }
+    ]
+  });
+  app.import('vendor/tracery/mods-eng-basic.js', {
+    using: [
+      { transformation: 'cjs', as: 'tracery/mods-eng-basic' }
+    ]
+  });
+
   return app.toTree();
 };

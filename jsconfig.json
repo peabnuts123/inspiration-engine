@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "inspiration-engine/*": ["./app/*"]
+    }
+  },
+  "exclude": [
+    "node_modules/**/*",
+    "bower_components/**/*",
+    "tmp/**/*",
+    "dist/**/*"
+  ]
+}
