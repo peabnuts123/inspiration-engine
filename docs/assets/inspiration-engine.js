@@ -761,6 +761,6 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("inspiration-engine/app")["default"].create({"name":"inspiration-engine","version":"0.0.0+53a5307e"});
+  require("inspiration-engine/app")["default"].create({"name":"inspiration-engine","version":"0.0.0+c13900f0"});
 }
 //# sourceMappingURL=inspiration-engine.map

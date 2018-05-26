@@ -45,6 +45,9 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     // here you can enable a production-specific feature
+
+    // root URL for production deployment
+    ENV.rootURL = '/inspiration-engine/';
   }
 
   return ENV;
