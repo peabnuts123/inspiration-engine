@@ -27,6 +27,7 @@
 {{#materialize/m-collapsible 
     icon='mode_edit'
     title="Edit Grammar JSON"
+    classNames="Collapsible-bleed"
 }}
     {{json-editor json=grammarConfig onChange=(action (mut grammarConfig))}}
 {{/materialize/m-collapsible}}
