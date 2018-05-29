@@ -14,6 +14,7 @@ export default Mixin.create({
   // Services
   tracery: inject(),
 
+  mode: 'table', // Options: table (table), linear
   numRows: 5,
   numColumns: 0, /* Computed by jQuery */
 
@@ -34,18 +35,33 @@ export default Mixin.create({
   init() {
     this._super(...arguments);
 
-    // Add window resize hook and call it once
-    let handleResize = this.handleResize.bind(this);
-    $(window).on('resize', handleResize);
-    runLater(() => {
-      this.handleResize()
-      this.generateItems();
-    });
+    const mode = get(this, 'mode');
+
+    if (mode === 'table') {
+      // Add window resize hook and call it once
+      let handleResize = this.handleResize.bind(this);
+
+      $(window).on('resize', handleResize);
+      runLater(() => {
+        this.handleResize()
+      });
+    } else if (mode === 'linear') {
+      // Hard code numColumns to 1
+      set(this, 'numColumns', 1);
+    }
+
+    // Generate initial set of items
+    this.generateItems();
   },
 
   willDestroy() {
     this._super(...arguments);
-    $(window).off("resize");
+
+    const mode = get(this, 'mode');
+
+    if (mode === 'table') {
+      $(window).off("resize");
+    }
   },
 
   handleResize() {
