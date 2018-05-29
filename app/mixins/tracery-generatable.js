@@ -44,14 +44,14 @@ export default Mixin.create({
       $(window).on('resize', handleResize);
       runLater(() => {
         this.handleResize()
+        this.generateItems();
       });
     } else if (mode === 'linear') {
       // Hard code numColumns to 1
       set(this, 'numColumns', 1);
+      this.generateItems();
     }
 
-    // Generate initial set of items
-    this.generateItems();
   },
 
   willDestroy() {
