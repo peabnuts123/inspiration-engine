@@ -15,11 +15,9 @@
 <div class="card-panel">
     <table class="striped centered">
         <tbody>
-            {{#each itemRows as |row|}}
+            {{#each items as |value|}}
                 <tr>
-                    {{#each row as |value|}}
-                        <td>{{value}}</td>
-                    {{/each}}
+                    <td>{{value}}</td>
                 </tr>
             {{/each}}
         </tbody>
