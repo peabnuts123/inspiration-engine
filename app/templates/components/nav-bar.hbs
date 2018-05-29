@@ -12,6 +12,6 @@
 
   <ul class="sidenav" id="mobile-nav">
       {{#each links as |link|}}
-        <li>{{#link-to link.route}}{{link.title}}{{/link-to}}</li>
+        <li class="sidenav-close {{if (eq link.route router.currentRouteName) 'active'}}">{{#link-to link.route}}{{link.title}}{{/link-to}}</li>
       {{/each}}
   </ul>
