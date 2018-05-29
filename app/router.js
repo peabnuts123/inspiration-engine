@@ -8,7 +8,8 @@ const Router = EmberRouter.extend({
 
 Router.map(function () {
   this.route('locations');
-  
+  this.route('messages');
+
   this.route('not-found', { path: '/*path' });
 });
 

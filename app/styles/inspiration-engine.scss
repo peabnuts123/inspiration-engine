@@ -16,3 +16,15 @@
 .Generation-controls {
   margin-bottom: 24px;
 }
+
+.jsoneditor-tree {
+  min-height: 300px;
+}
+
+.Text--debug {
+  padding: 5px;
+  color: #000 !important;
+  border: 1px dashed #000 !important;
+  background-color: #FC0 !important;
+  white-space: pre-line !important;
+}

@@ -11,6 +11,7 @@ class Link {
 
 export const links = [
   new Link("Locations", 'locations'),
+  new Link("Messages", 'messages'),
 ];
 
 export default Component.extend({

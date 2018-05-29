@@ -4,6 +4,7 @@ import { get } from '@ember/object';
 import { set } from '@ember/object';
 import { assert } from '@ember/debug';
 import { later as runLater } from '@ember/runloop';
+import { computed } from '@ember/object';
 import $ from 'jquery';
 
 import foldArray from 'inspiration-engine/utils/computed/fold-array';
@@ -13,26 +14,25 @@ export default Mixin.create({
   // Services
   tracery: inject(),
 
-  // State
-  _generator: null,
-
   numRows: 5,
   numColumns: 0, /* Computed by jQuery */
 
   items: [],
   itemRows: foldArray('items', 'numRows', 'numColumns'),
 
-  init() {
-    this._super(...arguments);
-
+  // Computed
+  _generator: computed('grammarConfig', function () {
     const tracery = get(this, 'tracery');
-
-    // Validate inputs
     const grammarConfig = get(this, 'grammarConfig');
+
+    // Validate input
     assert("Must define a property called `grammarConfig` on tracery-generatable", grammarConfig);
 
-    // Construct generator
-    set(this, '_generator', tracery.create(grammarConfig));
+    return tracery.create(grammarConfig);
+  }),
+
+  init() {
+    this._super(...arguments);
 
     // Add window resize hook and call it once
     let handleResize = this.handleResize.bind(this);

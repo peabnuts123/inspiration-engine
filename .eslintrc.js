@@ -11,6 +11,9 @@ module.exports = {
     'eslint:recommended',
     'plugin:ember/recommended'
   ],
+  globals: {
+    M: true,
+  },
   env: {
     browser: true
   },
