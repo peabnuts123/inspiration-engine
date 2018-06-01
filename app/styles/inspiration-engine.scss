@@ -40,3 +40,15 @@
   background-color: $secondary-color !important;
   border-bottom-color: $secondary-color !important;
 }
+
+@media only screen and (max-width: 500px) {
+  .brand-logo {
+    font-size: $navbar-brand-font-size * 0.75 !important;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .brand-logo {
+    font-size: $navbar-brand-font-size * 0.65 !important;
+  }
+}
