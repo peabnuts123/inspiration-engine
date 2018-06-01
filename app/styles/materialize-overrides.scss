@@ -1,0 +1,5 @@
+// Color
+$primary-color: color("amber", "darken-2") !default;
+$primary-color-light: lighten($primary-color, 15%);
+$primary-color-dark: darken($primary-color, 15%);
+$secondary-color: color("purple", "lighten-1") !default;
