@@ -44,6 +44,7 @@
     "eslint-plugin-ember": "^5.0.0",
     "jsoneditor": "^5.16.0",
     "loader.js": "^4.2.3",
+    "lodash": "^4.17.10",
     "materialize-css": "^1.0.0-rc.1"
   },
   "engines": {

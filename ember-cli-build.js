@@ -26,6 +26,11 @@ module.exports = function (defaults) {
   // along with the exports of each module as its value.
 
   app.import('node_modules/materialize-css/dist/js/materialize.js');
+  app.import('node_modules/lodash/lodash.js', {
+    using: [
+      { transformation: 'cjs', as: 'lodash' }
+    ]
+  });
 
   app.import('vendor/tracery/tracery.js', {
     using: [
